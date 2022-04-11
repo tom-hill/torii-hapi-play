@@ -1,5 +1,5 @@
-function indexRouteHandler(request, h) {
-  return h.response("Hello world!");
+function indexRouteHandler (request, h) {
+  return h.response('Hello world!');
 }
 
 module.exports = {

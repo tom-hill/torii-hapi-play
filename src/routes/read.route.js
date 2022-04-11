@@ -1,11 +1,11 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
-async function readRouteHandler(request, h) {
+async function readRouteHandler (request, h) {
   let data;
 
   try {
-    data = await fs.readFileSync(path.resolve(__dirname, "../data.json"));
+    data = await fs.readFileSync(path.resolve(__dirname, '../data.json'));
   } catch (err) {
     return h.response(err.message).code(500);
   }
@@ -18,11 +18,13 @@ async function readRouteHandler(request, h) {
 
   const createRows = () => {
     let output = '';
-    for (const app of cleanData) {
-      output += `<tr><td>${app.name}</td><td>${app.userCount}</td></tr>`;
+    for (let i = cleanData.length; i > 0; i--) {
+      const index = i - 1;
+      const { name, userCount } = cleanData[index];
+      output += `<tr><td>${name}</td><td>${userCount}</td></tr>`;
     }
     return output;
-  }
+  };
 
   const response = `
     <table>
@@ -34,7 +36,7 @@ async function readRouteHandler(request, h) {
     </table>
   `;
 
-  return h.response(response).type("text/html");
+  return h.response(response).type('text/html');
 }
 
 module.exports = {

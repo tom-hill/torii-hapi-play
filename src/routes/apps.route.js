@@ -1,13 +1,13 @@
-const Joi = require('joi')
+const Joi = require('joi');
 
-const validationSchema =  Joi.object({
+const validationSchema = Joi.object({
   apps: Joi.array().items(Joi.number()),
 });
 
-async function appsRouteHandler(request, h) {
+async function appsRouteHandler (request, h) {
   return h.response({
-    "numberOfApps": request?.payload?.apps?.length ?? 0,
-  }).type("text/json").code(200);
+    'numberOfApps': request?.payload?.apps?.length ?? 0,
+  }).type('text/json').code(200);
 }
 
 module.exports = {

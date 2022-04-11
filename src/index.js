@@ -1,43 +1,43 @@
-"use strict"
+'use strict';
 
-const hapi = require("@hapi/hapi");
+const hapi = require('@hapi/hapi');
 
 const indexRoute = require('./routes/index.route');
 const appsRoute = require('./routes/apps.route');
 const readRoute = require('./routes/read.route');
 
-async function init() {
+async function init () {
   const server = hapi.server({
     port: 3000,
-    host: "localhost",
+    host: 'localhost',
   });
 
-  server.route( {
-    method: "GET",
-    path: "/",
+  server.route({
+    method: 'GET',
+    path: '/',
     ...indexRoute,
   });
   server.route({
-    method: "POST",
-    path: "/apps",
+    method: 'POST',
+    path: '/apps',
     ...appsRoute,
   });
   server.route({
-    method: "GET",
-    path: "/read",
+    method: 'GET',
+    path: '/read',
     ...readRoute,
   });
 
   await server.start();
-  console.log("Hapi Server running on: \n%s", server.info.uri);
+  console.log(`Hapi Server running on: \n${server?.info?.uri}`);
 }
 
-function reportUnhandledRejection(error) {
+function reportUnhandledRejection (error) {
   const EXIT_CODE = 1;
   console.error(error);
   process.exit(EXIT_CODE);
 }
 
-process.on("unhandledRejection", reportUnhandledRejection);
+process.on('unhandledRejection', reportUnhandledRejection);
 
 init();
